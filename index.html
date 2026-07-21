@@ -3,70 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#07111f" />
-  <title>Torneo de Fútbol · Calculadora en vivo</title>
+  <meta name="theme-color" content="#ffffff" />
+  <title>Torneo de fútbol · Clasificación en vivo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          boxShadow: {
-            glow: '0 0 0 1px rgba(52,211,153,.25), 0 16px 40px rgba(16,185,129,.18)',
-          },
-          animation: {
-            'soft-pulse': 'softPulse 2.4s ease-in-out infinite',
-          },
-          keyframes: {
-            softPulse: {
-              '0%, 100%': { opacity: '1' },
-              '50%': { opacity: '.72' },
+          colors: {
+            google: {
+              blue: '#1A73E8',
+              text: '#202124',
+              muted: '#5F6368',
+              surface: '#F8F9FA',
+              line: '#E8EAED',
+              soft: '#F1F3F4',
+              blueSoft: '#E8F0FE',
+              greenSoft: '#E6F4EA',
+              greenText: '#137333',
+              yellowSoft: '#FEF7E0',
+              yellowText: '#B06000'
             }
+          },
+          fontFamily: {
+            sans: ['Roboto', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif']
           }
         }
       }
     }
   </script>
   <style>
-    html { background: #020617; }
+    :root { color-scheme: light; }
+    html { background: #f8f9fa; }
     body { min-height: 100dvh; }
     button, input { touch-action: manipulation; }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     input[type="number"] { -moz-appearance: textfield; }
-    .safe-bottom { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
-    .bottom-safe { padding-bottom: calc(.75rem + env(safe-area-inset-bottom)); }
-    .fade-in { animation: fadeIn .22s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .material-symbols-rounded {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .safe-content { padding-bottom: calc(6.25rem + env(safe-area-inset-bottom)); }
+    .safe-nav { padding-bottom: calc(.45rem + env(safe-area-inset-bottom)); }
+    .panel-enter { animation: panelEnter .28s ease-out; }
+    .score-flash { animation: scoreFlash .32s ease-out; }
+    @keyframes panelEnter {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scoreFlash {
+      0% { background-color: #e8f0fe; }
+      100% { background-color: #f1f3f4; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased selection:bg-emerald-400/30">
-  <div class="min-h-dvh bg-[radial-gradient(circle_at_top,_rgba(16,185,129,0.14),_transparent_34rem)]">
-    <header class="sticky top-0 z-30 border-b border-white/10 bg-slate-950/85 backdrop-blur-xl">
-      <div class="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+<body class="bg-google-surface font-sans text-google-text antialiased selection:bg-google-blueSoft">
+  <div class="min-h-dvh">
+    <header class="sticky top-0 z-30 border-b border-google-line bg-white/95 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <div class="min-w-0">
-          <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-emerald-400">Campamento Krusty</p>
-          <h1 class="truncate text-lg font-black tracking-tight sm:text-xl">Torneo de fútbol</h1>
+          <p class="truncate text-xs font-medium text-google-muted">Campamento Krusty</p>
+          <h1 class="truncate text-xl font-semibold tracking-tight">Torneo de fútbol</h1>
         </div>
-        <div class="flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5 text-xs font-bold text-emerald-300">
-          <span class="h-2 w-2 animate-soft-pulse rounded-full bg-emerald-400"></span>
+        <div class="inline-flex shrink-0 items-center gap-2 rounded-full bg-google-greenSoft px-3 py-1.5 text-xs font-medium text-google-greenText">
+          <span class="h-2 w-2 rounded-full bg-[#34A853]"></span>
           En vivo
         </div>
       </div>
     </header>
 
-    <main class="safe-bottom mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-7">
-      <section id="tab-calculadora" data-tab-panel="calculadora" class="fade-in space-y-6">
-        <div class="overflow-hidden rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-500/20 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-emerald-950/30 sm:p-7">
-          <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+    <main class="safe-content mx-auto max-w-6xl px-4 py-5 sm:px-6 sm:py-7">
+      <section data-tab-panel="calculadora" class="panel-enter space-y-6">
+        <div class="rounded-3xl border border-google-line bg-white p-5 sm:p-7">
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div class="max-w-2xl">
-              <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-emerald-200 ring-1 ring-white/10">
-                ⚽ Calculadora de clasificación
+              <div class="mb-3 inline-flex items-center gap-2 rounded-full bg-google-blueSoft px-3 py-1.5 text-xs font-medium text-google-blue">
+                <span class="material-symbols-rounded text-[18px]">calculate</span>
+                Calculadora de clasificación
               </div>
-              <h2 class="text-3xl font-black leading-tight tracking-tight sm:text-4xl">Simula la última jornada</h2>
-              <p class="mt-3 max-w-xl text-sm leading-6 text-slate-300 sm:text-base">Introduce los marcadores y consulta al instante los clasificados y los cruces de semifinales.</p>
+              <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Simula la última jornada</h2>
+              <p class="mt-3 text-sm leading-6 text-google-muted sm:text-base">Introduce los marcadores pendientes y consulta cómo cambiarían la clasificación y los cruces.</p>
             </div>
-            <button id="resetSimulation" type="button" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-bold text-white transition hover:bg-white/15 active:scale-[.98]">
-              ↺ Reiniciar simulación
+            <button id="resetSimulation" type="button" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#DADCE0] bg-white px-5 py-2.5 text-sm font-medium text-google-blue transition duration-300 hover:bg-google-blueSoft focus:outline-none focus:ring-4 focus:ring-google-blueSoft active:scale-[.98]">
+              <span class="material-symbols-rounded text-[20px]">restart_alt</span>
+              Reiniciar marcadores
             </button>
           </div>
         </div>
@@ -74,68 +102,75 @@
         <section aria-labelledby="pending-title">
           <div class="mb-3 flex items-end justify-between gap-3">
             <div>
-              <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">Fase de grupos</p>
-              <h2 id="pending-title" class="mt-1 text-xl font-black">Partidos pendientes</h2>
+              <p class="text-xs font-medium uppercase tracking-[.12em] text-google-muted">Fase de grupos</p>
+              <h2 id="pending-title" class="mt-1 text-xl font-semibold">Partidos pendientes</h2>
             </div>
-            <p id="simulationCounter" class="text-xs font-semibold text-slate-400"></p>
+            <p id="simulationCounter" class="text-xs font-medium text-google-muted"></p>
           </div>
           <div id="pendingMatches" class="grid gap-3 lg:grid-cols-2"></div>
         </section>
 
         <section aria-labelledby="semis-title">
           <div class="mb-3">
-            <p class="text-xs font-bold uppercase tracking-[0.18em] text-amber-400">Eliminatorias</p>
-            <h2 id="semis-title" class="mt-1 text-xl font-black">Semifinales dinámicas</h2>
+            <p class="text-xs font-medium uppercase tracking-[.12em] text-google-muted">Eliminatorias</p>
+            <h2 id="semis-title" class="mt-1 text-xl font-semibold">Cruces dinámicos</h2>
           </div>
-          <div id="semifinals" class="grid gap-4 lg:grid-cols-2"></div>
-          <div id="ageTiePanel" class="mt-4 hidden rounded-3xl border border-amber-400/30 bg-amber-400/10 p-4"></div>
+          <div id="qualificationNotices" class="mb-3 space-y-2"></div>
+          <div id="bracket" class="mx-auto max-w-3xl"></div>
+          <div id="ageTiePanel" class="mt-4 hidden"></div>
         </section>
 
-        <div class="rounded-2xl border border-sky-400/20 bg-sky-400/10 p-4 text-sm leading-6 text-sky-100">
-          <strong>Desempates activos:</strong> enfrentamiento directo para dos equipos; minitorneo para tres o más; diferencia de goles, goles a favor y edad acumulada cuando sea necesario.
-        </div>
+        <aside class="rounded-2xl border border-google-line bg-white p-4 text-sm leading-6 text-google-muted">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 text-google-blue">info</span>
+            <p><strong class="font-medium text-google-text">Criterios:</strong> la tabla es provisional hasta completar el grupo. Al finalizar se aplica resultado directo entre dos equipos o minitorneo entre tres o más.</p>
+          </div>
+        </aside>
       </section>
 
-      <section id="tab-clasificacion" data-tab-panel="clasificacion" class="hidden fade-in space-y-5">
+      <section data-tab-panel="clasificacion" class="hidden panel-enter space-y-5">
         <div>
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">Actualización automática</p>
-          <h2 class="mt-1 text-2xl font-black">Clasificación en vivo</h2>
-          <p class="mt-2 text-sm text-slate-400">Las dos primeras posiciones acceden a semifinales.</p>
+          <p class="text-xs font-medium uppercase tracking-[.12em] text-google-muted">Actualización automática</p>
+          <h2 class="mt-1 text-2xl font-semibold">Clasificación en vivo</h2>
+          <p class="mt-2 text-sm text-google-muted">Las dos primeras posiciones acceden a semifinales.</p>
         </div>
         <div id="standings" class="grid gap-5 xl:grid-cols-2"></div>
       </section>
 
-      <section id="tab-partidos" data-tab-panel="partidos" class="hidden fade-in space-y-7">
+      <section data-tab-panel="partidos" class="hidden panel-enter space-y-7">
         <div>
-          <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-400">Jorge D'Alessandro · Valdelagua</p>
-          <h2 class="mt-1 text-2xl font-black">Partidos y sanciones</h2>
+          <p class="text-xs font-medium uppercase tracking-[.12em] text-google-muted">Jorge D'Alessandro · Valdelagua</p>
+          <h2 class="mt-1 text-2xl font-semibold">Partidos y sanciones</h2>
         </div>
 
         <section aria-labelledby="matches-title">
-          <h3 id="matches-title" class="mb-3 text-lg font-black">Calendario y resultados</h3>
+          <h3 id="matches-title" class="mb-3 text-lg font-semibold">Calendario y resultados</h3>
           <div id="allMatches" class="space-y-3"></div>
         </section>
 
         <section aria-labelledby="sanctions-title">
-          <div class="mb-3 flex items-center justify-between gap-3">
-            <h3 id="sanctions-title" class="text-lg font-black">Control disciplinario</h3>
-            <span class="rounded-full bg-amber-400/10 px-3 py-1 text-xs font-bold text-amber-300 ring-1 ring-amber-400/20">2 amarillas = 1 partido</span>
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <h3 id="sanctions-title" class="text-lg font-semibold">Control disciplinario</h3>
+            <span class="rounded-full bg-google-yellowSoft px-3 py-1.5 text-xs font-medium text-google-yellowText">2 amarillas = 1 partido</span>
           </div>
           <div id="sanctions" class="space-y-3"></div>
         </section>
       </section>
     </main>
 
-    <nav class="bottom-safe fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/92 px-3 pt-2 backdrop-blur-xl">
-      <div class="mx-auto grid max-w-xl grid-cols-3 gap-2">
-        <button type="button" data-tab-button="calculadora" class="nav-button flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl bg-emerald-400/15 px-2 text-emerald-300 ring-1 ring-emerald-400/20 transition">
-          <span class="text-xl">⚽</span><span class="text-[11px] font-bold">Calculadora</span>
+    <nav class="safe-nav fixed inset-x-0 bottom-0 z-40 border-t border-google-line bg-white/95 px-3 pt-2 backdrop-blur" aria-label="Navegación principal">
+      <div class="mx-auto grid max-w-xl grid-cols-3 gap-1">
+        <button type="button" data-tab-button="calculadora" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-blue transition duration-300">
+          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full bg-google-blueSoft px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">calculate</span></span>
+          <span class="text-[11px] font-medium">Calculadora</span>
         </button>
-        <button type="button" data-tab-button="clasificacion" class="nav-button flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 text-slate-400 transition hover:bg-white/5">
-          <span class="text-xl">📊</span><span class="text-[11px] font-bold">Clasificación</span>
+        <button type="button" data-tab-button="clasificacion" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-muted transition duration-300">
+          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">leaderboard</span></span>
+          <span class="text-[11px] font-medium">Clasificación</span>
         </button>
-        <button type="button" data-tab-button="partidos" class="nav-button flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 text-slate-400 transition hover:bg-white/5">
-          <span class="text-xl">🗓️</span><span class="text-[11px] font-bold">Partidos</span>
+        <button type="button" data-tab-button="partidos" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-muted transition duration-300">
+          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">event_note</span></span>
+          <span class="text-[11px] font-medium">Partidos</span>
         </button>
       </div>
     </nav>
@@ -176,34 +211,38 @@
       ]
     };
 
-    // Los cuatro resultados que faltan en el JSON se deducen de forma exacta
-    // restando los marcadores visibles a las estadísticas acumuladas tras 2 jornadas.
-    const inferredHistoricalMatches = [
-      { id: 'h1', fase: 'GRUPO A', local: 'Atlético Trink2 - Camiseta Amarilla/Morada', visitante: 'Abirras & Picias- Verde Betis', goles_local: 2, goles_visitante: 0, finalizado: true, inferred: true },
-      { id: 'h2', fase: 'GRUPO A', local: 'Los Bingos- Morado', visitante: 'Zona Taurina- Rosa', goles_local: 4, goles_visitante: 2, finalizado: true, inferred: true },
-      { id: 'h3', fase: 'GRUPO B', local: 'Rayo Guijuelo - (Camiseta Blanca)', visitante: 'Pedña Mijatovic - Camiseta Negra', goles_local: 1, goles_visitante: 0, finalizado: true, inferred: true },
-      { id: 'h4', fase: 'GRUPO B', local: 'La Carnicería de Rubén- Azul Oscuro', visitante: 'Picias 3.0 - (Camiseta Azul)', goles_local: 6, goles_visitante: 1, finalizado: true, inferred: true }
-    ];
-
     const state = {
-      scores: Object.fromEntries(initialTournament.enfrentamientos.filter(m => !m.finalizado).map(m => [m.id, { local: null, visitante: null }])),
-      ages: Object.fromEntries(Object.values(initialTournament.grupos).flat().map(t => [t.equipo, t.edades_acumuladas || 0])),
+      scores: Object.fromEntries(
+        initialTournament.enfrentamientos
+          .filter(match => !match.finalizado)
+          .map(match => [match.id, { local: null, visitante: null }])
+      ),
+      ages: Object.fromEntries(
+        Object.values(initialTournament.grupos).flat().map(team => [team.equipo, team.edades_acumuladas || null])
+      ),
       activeTab: 'calculadora'
     };
 
     const $ = (selector, root = document) => root.querySelector(selector);
     const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-    const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[char]));
+    const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;'
+    }[char]));
 
     function shortTeamName(team) {
       return team
-        .replace(/\s*-\s*\(?(Camiseta\s+)?/i, ' · ')
-        .replace(/\)?$/, '')
-        .replace('Pedña', 'Peña');
+        .replace(/\s*-\s*\(Camiseta\s+/i, ' · ')
+        .replace(/\s*-\s*Camiseta\s+/i, ' · ')
+        .replace(/\s*-\s*/g, ' · ')
+        .replace(/\)$/, '');
     }
 
     function groupForMatch(match) {
       return match.fase.includes('A') ? 'A' : 'B';
+    }
+
+    function isScoreComplete(score) {
+      return Number.isInteger(score.local) && Number.isInteger(score.visitante);
     }
 
     function getSimulatedMatches() {
@@ -211,23 +250,33 @@
         .filter(match => !match.finalizado)
         .map(match => {
           const score = state.scores[match.id];
-          const complete = Number.isInteger(score.local) && Number.isInteger(score.visitante);
-          return { ...match, goles_local: score.local, goles_visitante: score.visitante, finalizado: complete, simulated: complete };
+          return {
+            ...match,
+            goles_local: score.local,
+            goles_visitante: score.visitante,
+            finalizado: isScoreComplete(score),
+            simulated: isScoreComplete(score)
+          };
         });
     }
 
-    function getAllHeadToHeadMatches() {
+    function getKnownMatches() {
       return [
-        ...initialTournament.enfrentamientos.filter(m => m.finalizado),
-        ...inferredHistoricalMatches,
-        ...getSimulatedMatches().filter(m => m.finalizado)
+        ...initialTournament.enfrentamientos.filter(match => match.finalizado),
+        ...getSimulatedMatches().filter(match => match.finalizado)
       ];
+    }
+
+    function isGroupComplete(group) {
+      return initialTournament.enfrentamientos
+        .filter(match => !match.finalizado && groupForMatch(match) === group)
+        .every(match => isScoreComplete(state.scores[match.id]));
     }
 
     function applyResult(table, match) {
       if (!match.finalizado || !Number.isInteger(match.goles_local) || !Number.isInteger(match.goles_visitante)) return;
-      const local = table.find(t => t.equipo === match.local);
-      const visitor = table.find(t => t.equipo === match.visitante);
+      const local = table.find(team => team.equipo === match.local);
+      const visitor = table.find(team => team.equipo === match.visitante);
       if (!local || !visitor) return;
 
       local.j += 1;
@@ -238,12 +287,20 @@
       visitor.gc += match.goles_local;
 
       if (match.goles_local > match.goles_visitante) {
-        local.g += 1; visitor.p += 1; local.pts += 3;
+        local.g += 1;
+        visitor.p += 1;
+        local.pts += 3;
       } else if (match.goles_local < match.goles_visitante) {
-        visitor.g += 1; local.p += 1; visitor.pts += 3;
+        visitor.g += 1;
+        local.p += 1;
+        visitor.pts += 3;
       } else {
-        local.e += 1; visitor.e += 1; local.pts += 1; visitor.pts += 1;
+        local.e += 1;
+        visitor.e += 1;
+        local.pts += 1;
+        visitor.pts += 1;
       }
+
       local.dif = local.gf - local.gc;
       visitor.dif = visitor.gf - visitor.gc;
     }
@@ -252,303 +309,516 @@
       return matches.find(match =>
         (match.local === teamA.equipo && match.visitante === teamB.equipo) ||
         (match.local === teamB.equipo && match.visitante === teamA.equipo)
-      );
+      ) || null;
     }
 
-    function directWinner(teamA, teamB, matches) {
-      const match = getDirectMatch(teamA, teamB, matches);
-      if (!match) return 0;
-      if (match.goles_local === match.goles_visitante) return 0;
-      const winner = match.goles_local > match.goles_visitante ? match.local : match.visitante;
-      return winner === teamA.equipo ? -1 : 1;
+    function compareByInitialPosition(teamA, teamB) {
+      return teamA.initialPos - teamB.initialPos;
     }
 
-    function compareTwo(teamA, teamB, matches) {
-      const direct = directWinner(teamA, teamB, matches);
-      if (direct !== 0) return direct;
+    function compareProvisional(teamA, teamB) {
+      if (teamA.pts !== teamB.pts) return teamB.pts - teamA.pts;
       if (teamA.dif !== teamB.dif) return teamB.dif - teamA.dif;
       if (teamA.gf !== teamB.gf) return teamB.gf - teamA.gf;
-      const ageA = Number(state.ages[teamA.equipo]) || 0;
-      const ageB = Number(state.ages[teamB.equipo]) || 0;
-      if (ageA !== ageB) return ageB - ageA;
-      return teamA.equipo.localeCompare(teamB.equipo, 'es');
+      return compareByInitialPosition(teamA, teamB);
     }
 
-    function miniStats(teams, matches) {
-      const names = new Set(teams.map(t => t.equipo));
-      const stats = Object.fromEntries(teams.map(t => [t.equipo, { pts: 0, gf: 0, gc: 0, dif: 0 }]));
-      matches.filter(m => names.has(m.local) && names.has(m.visitante)).forEach(match => {
+    function rankTwoTeamTie(teams, matches, group) {
+      const [teamA, teamB] = teams;
+      const direct = getDirectMatch(teamA, teamB, matches);
+
+      if (!direct) {
+        return {
+          ordered: [...teams].sort(compareByInitialPosition),
+          issue: {
+            group,
+            teams: teams.map(team => team.equipo),
+            type: 'missing-direct-result',
+            message: 'No se ha aportado el resultado directo necesario para resolver este empate.'
+          }
+        };
+      }
+
+      if (direct.goles_local !== direct.goles_visitante) {
+        const winner = direct.goles_local > direct.goles_visitante ? direct.local : direct.visitante;
+        return {
+          ordered: [...teams].sort((a, b) => a.equipo === winner ? -1 : b.equipo === winner ? 1 : 0),
+          issue: null
+        };
+      }
+
+      if (teamA.dif !== teamB.dif) {
+        return { ordered: [...teams].sort((a, b) => b.dif - a.dif), issue: null };
+      }
+
+      if (teamA.gf !== teamB.gf) {
+        return { ordered: [...teams].sort((a, b) => b.gf - a.gf), issue: null };
+      }
+
+      const ageA = Number(state.ages[teamA.equipo]);
+      const ageB = Number(state.ages[teamB.equipo]);
+      const agesAvailable = Number.isFinite(ageA) && ageA > 0 && Number.isFinite(ageB) && ageB > 0;
+
+      if (agesAvailable && ageA !== ageB) {
+        return { ordered: [...teams].sort((a, b) => Number(state.ages[b.equipo]) - Number(state.ages[a.equipo])), issue: null };
+      }
+
+      return {
+        ordered: [...teams].sort(compareByInitialPosition),
+        issue: {
+          group,
+          teams: teams.map(team => team.equipo),
+          type: 'age-required',
+          message: agesAvailable
+            ? 'La suma de edades también está empatada; el reglamento no define un criterio posterior.'
+            : 'Falta la suma de edades de la última convocatoria para resolver el empate.'
+        }
+      };
+    }
+
+    function getMiniTournamentStats(teams, matches) {
+      const names = new Set(teams.map(team => team.equipo));
+      const stats = Object.fromEntries(teams.map(team => [team.equipo, { pts: 0, gf: 0, gc: 0, dif: 0 }]));
+      const relevantMatches = matches.filter(match => names.has(match.local) && names.has(match.visitante));
+
+      relevantMatches.forEach(match => {
         const local = stats[match.local];
         const visitor = stats[match.visitante];
-        local.gf += match.goles_local; local.gc += match.goles_visitante;
-        visitor.gf += match.goles_visitante; visitor.gc += match.goles_local;
+        local.gf += match.goles_local;
+        local.gc += match.goles_visitante;
+        visitor.gf += match.goles_visitante;
+        visitor.gc += match.goles_local;
+
         if (match.goles_local > match.goles_visitante) local.pts += 3;
         else if (match.goles_local < match.goles_visitante) visitor.pts += 3;
-        else { local.pts += 1; visitor.pts += 1; }
+        else {
+          local.pts += 1;
+          visitor.pts += 1;
+        }
       });
-      Object.values(stats).forEach(s => { s.dif = s.gf - s.gc; });
+
+      Object.values(stats).forEach(item => { item.dif = item.gf - item.gc; });
       return stats;
     }
 
-    function sameMiniCriteria(teamA, teamB, mini) {
-      const a = mini[teamA.equipo];
-      const b = mini[teamB.equipo];
-      return a.pts === b.pts && a.dif === b.dif && a.gf === b.gf;
+    function hasEveryPairResult(teams, matches) {
+      for (let i = 0; i < teams.length; i += 1) {
+        for (let j = i + 1; j < teams.length; j += 1) {
+          if (!getDirectMatch(teams[i], teams[j], matches)) return false;
+        }
+      }
+      return true;
     }
 
-    function rankPointsGroup(teams, matches) {
-      if (teams.length <= 1) return teams;
-      if (teams.length === 2) return [...teams].sort((a, b) => compareTwo(a, b, matches));
+    function rankMultipleTie(teams, matches, group) {
+      if (!hasEveryPairResult(teams, matches)) {
+        return {
+          ordered: [...teams].sort(compareByInitialPosition),
+          issue: {
+            group,
+            teams: teams.map(team => team.equipo),
+            type: 'incomplete-mini-tournament',
+            message: 'Faltan resultados entre los equipos empatados y no puede calcularse el minitorneo.'
+          }
+        };
+      }
 
-      const mini = miniStats(teams, matches);
+      const mini = getMiniTournamentStats(teams, matches);
       const ordered = [...teams].sort((a, b) => {
-        const ma = mini[a.equipo];
-        const mb = mini[b.equipo];
-        if (ma.pts !== mb.pts) return mb.pts - ma.pts;
-        if (ma.dif !== mb.dif) return mb.dif - ma.dif;
-        if (ma.gf !== mb.gf) return mb.gf - ma.gf;
-        return 0;
+        const statA = mini[a.equipo];
+        const statB = mini[b.equipo];
+        if (statA.pts !== statB.pts) return statB.pts - statA.pts;
+        if (statA.dif !== statB.dif) return statB.dif - statA.dif;
+        if (statA.gf !== statB.gf) return statB.gf - statA.gf;
+        return compareByInitialPosition(a, b);
       });
 
-      const output = [];
+      const unresolvedTeams = [];
       for (let i = 0; i < ordered.length;) {
+        const base = mini[ordered[i].equipo];
         let j = i + 1;
-        while (j < ordered.length && sameMiniCriteria(ordered[i], ordered[j], mini)) j++;
-        const subgroup = ordered.slice(i, j);
-        if (subgroup.length === 2) {
-          output.push(...subgroup.sort((a, b) => compareTwo(a, b, matches)));
-        } else if (subgroup.length > 2) {
-          // Si el minitorneo sigue sin separar a 3+ equipos, la edad acumulada
-          // actúa únicamente como último recurso operativo para no inventar resultados.
-          output.push(...subgroup.sort((a, b) => {
-            const ageA = Number(state.ages[a.equipo]) || 0;
-            const ageB = Number(state.ages[b.equipo]) || 0;
-            return ageB - ageA || a.equipo.localeCompare(b.equipo, 'es');
-          }));
-        } else output.push(...subgroup);
+        while (j < ordered.length) {
+          const candidate = mini[ordered[j].equipo];
+          if (candidate.pts !== base.pts || candidate.dif !== base.dif || candidate.gf !== base.gf) break;
+          j += 1;
+        }
+        if (j - i > 1) unresolvedTeams.push(...ordered.slice(i, j).map(team => team.equipo));
         i = j;
       }
-      return output;
+
+      return {
+        ordered,
+        issue: unresolvedTeams.length
+          ? {
+              group,
+              teams: unresolvedTeams,
+              type: 'multiple-tie-not-resolved',
+              message: 'El minitorneo sigue empatado tras puntos, diferencia de goles y goles a favor; el reglamento no define otro criterio.'
+            }
+          : null
+      };
+    }
+
+    function calculateGroupStandings(group) {
+      const table = initialTournament.grupos[group].map(team => ({
+        ...team,
+        initialPos: team.pos,
+        edades_acumuladas: Number(state.ages[team.equipo]) || 0
+      }));
+
+      getSimulatedMatches()
+        .filter(match => match.finalizado && groupForMatch(match) === group)
+        .forEach(match => applyResult(table, match));
+
+      const complete = isGroupComplete(group);
+      if (!complete) {
+        return {
+          complete,
+          issues: [],
+          table: [...table].sort(compareProvisional).map((team, index) => ({ ...team, pos: index + 1 }))
+        };
+      }
+
+      const matches = getKnownMatches().filter(match => groupForMatch(match) === group);
+      const pointGroups = new Map();
+      table.forEach(team => {
+        if (!pointGroups.has(team.pts)) pointGroups.set(team.pts, []);
+        pointGroups.get(team.pts).push(team);
+      });
+
+      const issues = [];
+      const ordered = [...pointGroups.keys()]
+        .sort((a, b) => b - a)
+        .flatMap(points => {
+          const tied = pointGroups.get(points);
+          if (tied.length === 1) return tied;
+          const ranking = tied.length === 2
+            ? rankTwoTeamTie(tied, matches, group)
+            : rankMultipleTie(tied, matches, group);
+          if (ranking.issue) issues.push(ranking.issue);
+          return ranking.ordered;
+        })
+        .map((team, index) => ({ ...team, pos: index + 1 }));
+
+      issues.forEach(issue => {
+        const positions = ordered
+          .filter(team => issue.teams.includes(team.equipo))
+          .map(team => team.pos);
+        issue.minPosition = Math.min(...positions);
+        issue.maxPosition = Math.max(...positions);
+        issue.affectsSemifinals = issue.minPosition <= 2;
+      });
+
+      return { complete, issues, table: ordered };
     }
 
     function calculateStandings() {
-      const simulated = getSimulatedMatches().filter(m => m.finalizado);
-      const allMatches = getAllHeadToHeadMatches();
-      const result = {};
-
-      for (const group of ['A', 'B']) {
-        const table = initialTournament.grupos[group].map(team => ({ ...team, edades_acumuladas: Number(state.ages[team.equipo]) || 0 }));
-        simulated.filter(m => groupForMatch(m) === group).forEach(match => applyResult(table, match));
-
-        const byPoints = new Map();
-        table.forEach(team => {
-          if (!byPoints.has(team.pts)) byPoints.set(team.pts, []);
-          byPoints.get(team.pts).push(team);
-        });
-
-        const ordered = [...byPoints.keys()]
-          .sort((a, b) => b - a)
-          .flatMap(points => rankPointsGroup(byPoints.get(points), allMatches));
-
-        result[group] = ordered.map((team, index) => ({ ...team, pos: index + 1 }));
-      }
-      return result;
-    }
-
-    function findAbsoluteTies(standings) {
-      const ties = [];
-      for (const group of ['A', 'B']) {
-        const table = standings[group];
-        for (let i = 0; i < table.length - 1; i++) {
-          const a = table[i];
-          const b = table[i + 1];
-          if (a.pts !== b.pts) continue;
-          const cmp = compareTwo(a, b, getAllHeadToHeadMatches());
-          const sameAge = (Number(state.ages[a.equipo]) || 0) === (Number(state.ages[b.equipo]) || 0);
-          const direct = directWinner(a, b, getAllHeadToHeadMatches());
-          if (direct === 0 && a.dif === b.dif && a.gf === b.gf && sameAge) {
-            ties.push({ group, teams: [a, b], affectsQualification: i <= 1 });
-          }
-        }
-      }
-      return ties;
+      return {
+        A: calculateGroupStandings('A'),
+        B: calculateGroupStandings('B')
+      };
     }
 
     function scoreControl(match, side, value) {
       const label = side === 'local' ? 'Goles del equipo local' : 'Goles del equipo visitante';
       return `
-        <div class="flex items-center gap-2">
-          <button type="button" data-score-action="decrease" data-match-id="${match.id}" data-side="${side}" aria-label="Restar gol" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-slate-800 text-2xl font-black text-slate-200 ring-1 ring-white/10 transition hover:bg-slate-700 active:scale-95">−</button>
-          <input aria-label="${label}" inputmode="numeric" min="0" max="99" type="number" data-score-input data-match-id="${match.id}" data-side="${side}" value="${value ?? ''}" placeholder="–" class="h-14 w-16 rounded-2xl border border-white/10 bg-slate-950 text-center text-2xl font-black text-white outline-none transition focus:border-emerald-400 focus:ring-4 focus:ring-emerald-400/10 sm:w-20" />
-          <button type="button" data-score-action="increase" data-match-id="${match.id}" data-side="${side}" aria-label="Sumar gol" class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-400 text-2xl font-black text-slate-950 transition hover:bg-emerald-300 active:scale-95">+</button>
+        <div class="flex shrink-0 items-center gap-2">
+          <button type="button" data-score-action="decrease" data-match-id="${match.id}" data-side="${side}" aria-label="Restar gol" class="grid h-10 w-10 place-items-center rounded-full border border-google-line bg-white text-google-muted transition duration-300 hover:bg-google-soft active:scale-95">
+            <span class="material-symbols-rounded text-[20px]">remove</span>
+          </button>
+          <input aria-label="${label}" inputmode="numeric" min="0" max="99" type="number" data-score-input data-match-id="${match.id}" data-side="${side}" value="${value ?? ''}" placeholder="–" class="h-12 w-14 rounded-xl border-0 bg-google-soft text-center text-xl font-semibold text-google-text outline-none transition duration-300 focus:bg-google-blueSoft focus:ring-2 focus:ring-google-blue sm:w-16" />
+          <button type="button" data-score-action="increase" data-match-id="${match.id}" data-side="${side}" aria-label="Sumar gol" class="grid h-10 w-10 place-items-center rounded-full bg-google-blue text-white transition duration-300 hover:bg-[#1557B0] active:scale-95">
+            <span class="material-symbols-rounded text-[20px]">add</span>
+          </button>
         </div>`;
     }
 
     function renderPendingMatches() {
-      const matches = initialTournament.enfrentamientos.filter(m => !m.finalizado);
+      const matches = initialTournament.enfrentamientos.filter(match => !match.finalizado);
       $('#pendingMatches').innerHTML = matches.map(match => {
         const score = state.scores[match.id];
-        const complete = Number.isInteger(score.local) && Number.isInteger(score.visitante);
+        const complete = isScoreComplete(score);
         return `
-          <article class="rounded-3xl border ${complete ? 'border-emerald-400/30 shadow-glow' : 'border-white/10'} bg-slate-900/85 p-4 transition-all duration-300 sm:p-5">
-            <div class="mb-4 flex items-center justify-between gap-3">
+          <article class="rounded-3xl border ${complete ? 'border-[#CEEAD6]' : 'border-google-line'} bg-white p-4 transition-all duration-300 sm:p-5">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2">
-                <span class="rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-black tracking-[0.15em] text-slate-300 ring-1 ring-white/10">${match.fase}</span>
-                ${complete ? '<span class="rounded-full bg-emerald-400/15 px-2.5 py-1 text-[10px] font-black text-emerald-300 ring-1 ring-emerald-400/20">SIMULADO</span>' : ''}
+                <span class="rounded-full bg-google-soft px-3 py-1 text-[11px] font-medium text-google-muted">${match.fase}</span>
+                ${complete ? '<span class="rounded-full bg-google-greenSoft px-3 py-1 text-[11px] font-medium text-google-greenText">Simulado</span>' : ''}
               </div>
-              <time class="text-xs font-bold text-slate-400">${match.fecha}</time>
+              <time class="rounded-full bg-google-soft px-3 py-1 text-[11px] font-medium text-google-muted">${match.fecha}</time>
             </div>
-            <div class="space-y-4">
-              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p class="min-w-0 flex-1 text-sm font-bold leading-5 text-slate-100 sm:pr-3">${escapeHtml(shortTeamName(match.local))}</p>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between gap-3">
+                <p class="min-w-0 flex-1 text-sm font-medium leading-5">${escapeHtml(shortTeamName(match.local))}</p>
                 ${scoreControl(match, 'local', score.local)}
               </div>
-              <div class="border-t border-white/5"></div>
-              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p class="min-w-0 flex-1 text-sm font-bold leading-5 text-slate-100 sm:pr-3">${escapeHtml(shortTeamName(match.visitante))}</p>
+              <div class="h-px bg-google-line"></div>
+              <div class="flex items-center justify-between gap-3">
+                <p class="min-w-0 flex-1 text-sm font-medium leading-5">${escapeHtml(shortTeamName(match.visitante))}</p>
                 ${scoreControl(match, 'visitante', score.visitante)}
               </div>
             </div>
           </article>`;
       }).join('');
-      const completed = matches.filter(m => Number.isInteger(state.scores[m.id].local) && Number.isInteger(state.scores[m.id].visitante)).length;
+
+      const completed = matches.filter(match => isScoreComplete(state.scores[match.id])).length;
       $('#simulationCounter').textContent = `${completed}/${matches.length} simulados`;
     }
 
-    function teamSlot(label, team, qualified = true) {
+    function getSlotStatus(groupResult, position) {
+      const issue = groupResult.issues.find(item => item.affectsSemifinals && item.minPosition <= position && item.maxPosition >= position);
+      if (issue) return { label: 'Desempate pendiente', className: 'bg-google-yellowSoft text-google-yellowText', unresolved: true };
+      if (groupResult.complete) return { label: 'Clasificado', className: 'bg-google-greenSoft text-google-greenText', unresolved: false };
+      return { label: 'Provisional', className: 'bg-google-blueSoft text-google-blue', unresolved: false };
+    }
+
+    function bracketTeam(label, team, status) {
       return `
-        <div class="rounded-2xl border ${qualified ? 'border-emerald-400/25 bg-emerald-400/10' : 'border-white/10 bg-white/5'} p-3 transition-all duration-300">
+        <div class="rounded-2xl border border-google-line bg-white px-4 py-3 transition-all duration-300">
           <div class="mb-2 flex items-center justify-between gap-2">
-            <span class="text-[10px] font-black uppercase tracking-[0.16em] text-slate-400">${label}</span>
-            ${qualified ? '<span class="rounded-full bg-emerald-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wide text-slate-950">Clasificado</span>' : ''}
+            <span class="text-[10px] font-medium uppercase tracking-[.11em] text-google-muted">${label}</span>
+            <span class="rounded-full px-2.5 py-1 text-[10px] font-medium ${status.className}">${status.label}</span>
           </div>
-          <p class="text-sm font-black leading-5 text-white">${escapeHtml(team ? shortTeamName(team.equipo) : 'Por decidir')}</p>
-          ${team ? `<p class="mt-1 text-xs font-semibold text-emerald-300">${team.pts} pts · DIF ${team.dif > 0 ? '+' : ''}${team.dif}</p>` : ''}
+          <p class="text-sm font-semibold leading-5 ${status.unresolved ? 'text-google-muted' : 'text-google-text'}">${status.unresolved ? 'Pendiente de resolver' : escapeHtml(shortTeamName(team.equipo))}</p>
+          ${status.unresolved ? '' : `<p class="mt-1 text-xs text-google-muted">${team.pts} pts · DIF ${team.dif > 0 ? '+' : ''}${team.dif}</p>`}
         </div>`;
     }
 
-    function renderSemifinals(standings) {
-      const sf1 = { home: standings.A[1], away: standings.B[0] };
-      const sf2 = { home: standings.A[0], away: standings.B[1] };
-      $('#semifinals').innerHTML = `
-        <article class="rounded-3xl border border-emerald-400/20 bg-slate-900/90 p-4 shadow-glow sm:p-5">
-          <div class="mb-4 flex items-start justify-between gap-3">
-            <div><p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">Semifinal 1</p><h3 class="mt-1 text-lg font-black">2º Grupo A vs 1º Grupo B</h3></div>
-            <time class="text-right text-xs font-bold leading-5 text-slate-400">mar, 21/7<br>21:10</time>
+    function renderBracket(standings) {
+      const groupA = standings.A;
+      const groupB = standings.B;
+      const sf1HomeStatus = getSlotStatus(groupA, 2);
+      const sf1AwayStatus = getSlotStatus(groupB, 1);
+      const sf2HomeStatus = getSlotStatus(groupA, 1);
+      const sf2AwayStatus = getSlotStatus(groupB, 2);
+
+      $('#bracket').innerHTML = `
+        <div class="space-y-0">
+          <article class="rounded-3xl border border-google-line bg-white p-4 sm:p-5">
+            <div class="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <p class="text-xs font-medium text-google-blue">Semifinal 1</p>
+                <h3 class="mt-1 text-base font-semibold">2º Grupo A · 1º Grupo B</h3>
+              </div>
+              <time class="text-right text-xs leading-5 text-google-muted">mar, 21/7<br>21:10</time>
+            </div>
+            <div class="space-y-2">
+              ${bracketTeam('2º Grupo A', groupA.table[1], sf1HomeStatus)}
+              ${bracketTeam('1º Grupo B', groupB.table[0], sf1AwayStatus)}
+            </div>
+          </article>
+
+          <div class="mx-auto h-6 w-px bg-[#DADCE0]"></div>
+
+          <article class="rounded-3xl border border-google-line bg-white p-4 sm:p-5">
+            <div class="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <p class="text-xs font-medium text-google-blue">Semifinal 2</p>
+                <h3 class="mt-1 text-base font-semibold">1º Grupo A · 2º Grupo B</h3>
+              </div>
+              <time class="text-right text-xs leading-5 text-google-muted">mar, 21/7<br>21:45</time>
+            </div>
+            <div class="space-y-2">
+              ${bracketTeam('1º Grupo A', groupA.table[0], sf2HomeStatus)}
+              ${bracketTeam('2º Grupo B', groupB.table[1], sf2AwayStatus)}
+            </div>
+          </article>
+
+          <div class="mx-auto h-6 w-px bg-[#DADCE0]"></div>
+
+          <article class="rounded-3xl border border-google-line bg-white p-4 sm:p-5">
+            <div class="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <p class="text-xs font-medium text-google-blue">Gran final</p>
+                <h3 class="mt-1 text-base font-semibold">Ganador SF1 · Ganador SF2</h3>
+              </div>
+              <time class="text-right text-xs leading-5 text-google-muted">mié, 22/7<br>21:05</time>
+            </div>
+            <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl bg-google-soft px-4 py-5">
+              <p class="text-right text-sm font-medium text-google-muted">Ganador SF1</p>
+              <span class="text-xs font-medium text-google-muted">VS</span>
+              <p class="text-sm font-medium text-google-muted">Ganador SF2</p>
+            </div>
+          </article>
+        </div>`;
+    }
+
+    function renderQualificationNotices(standings) {
+      const issues = [...standings.A.issues, ...standings.B.issues].filter(issue => issue.affectsSemifinals);
+      $('#qualificationNotices').innerHTML = issues.map(issue => `
+        <div class="flex gap-3 rounded-2xl bg-google-yellowSoft p-4 text-sm leading-5 text-google-yellowText">
+          <span class="material-symbols-rounded mt-0.5 shrink-0 text-[20px]">warning</span>
+          <div>
+            <p class="font-medium">Grupo ${issue.group}: desempate pendiente</p>
+            <p class="mt-1">${escapeHtml(issue.message)}</p>
           </div>
-          <div class="space-y-2">${teamSlot('2º Grupo A', sf1.home)}${teamSlot('1º Grupo B', sf1.away)}</div>
-        </article>
-        <article class="rounded-3xl border border-emerald-400/20 bg-slate-900/90 p-4 shadow-glow sm:p-5">
-          <div class="mb-4 flex items-start justify-between gap-3">
-            <div><p class="text-xs font-black uppercase tracking-[0.18em] text-emerald-400">Semifinal 2</p><h3 class="mt-1 text-lg font-black">1º Grupo A vs 2º Grupo B</h3></div>
-            <time class="text-right text-xs font-bold leading-5 text-slate-400">mar, 21/7<br>21:45</time>
-          </div>
-          <div class="space-y-2">${teamSlot('1º Grupo A', sf2.home)}${teamSlot('2º Grupo B', sf2.away)}</div>
-        </article>
-        <article class="rounded-3xl border border-amber-400/20 bg-gradient-to-br from-amber-400/15 to-slate-900 p-4 lg:col-span-2 sm:p-5">
-          <div class="mb-4 flex items-start justify-between gap-3">
-            <div><p class="text-xs font-black uppercase tracking-[0.18em] text-amber-400">Gran final</p><h3 class="mt-1 text-lg font-black">Ganador SF1 vs Ganador SF2</h3></div>
-            <time class="text-right text-xs font-bold leading-5 text-slate-400">mié, 22/7<br>21:05</time>
-          </div>
-          <div class="grid gap-2 sm:grid-cols-2">${teamSlot('Ganador SF1', null, false)}${teamSlot('Ganador SF2', null, false)}</div>
-        </article>`;
+        </div>`).join('');
     }
 
     function renderAgeTiePanel(standings) {
-      const ties = findAbsoluteTies(standings);
+      const ageIssues = [...standings.A.issues, ...standings.B.issues].filter(issue => issue.type === 'age-required');
       const panel = $('#ageTiePanel');
-      if (!ties.length) {
+
+      if (!ageIssues.length) {
         panel.classList.add('hidden');
         panel.innerHTML = '';
         return;
       }
-      const teams = [...new Set(ties.flatMap(t => t.teams.map(team => team.equipo)))];
+
+      const teams = [...new Set(ageIssues.flatMap(issue => issue.teams))];
       panel.classList.remove('hidden');
       panel.innerHTML = `
-        <div class="mb-3">
-          <p class="text-xs font-black uppercase tracking-[0.16em] text-amber-300">Desempate absoluto</p>
-          <h3 class="mt-1 font-black text-white">Introduce la suma de edades</h3>
-          <p class="mt-1 text-xs leading-5 text-amber-100/80">Los criterios deportivos no separan a estos equipos. La mayor edad acumulada queda por delante.</p>
-        </div>
-        <div class="grid gap-3 sm:grid-cols-2">
-          ${teams.map(team => `
-            <label class="block rounded-2xl bg-slate-950/40 p-3 ring-1 ring-amber-300/15">
-              <span class="block text-xs font-bold leading-5 text-slate-200">${escapeHtml(shortTeamName(team))}</span>
-              <input type="number" inputmode="numeric" min="0" data-age-input data-team="${escapeHtml(team)}" value="${state.ages[team] || ''}" placeholder="Edad acumulada" class="mt-2 h-12 w-full rounded-xl border border-amber-300/20 bg-slate-950 px-3 text-base font-black text-white outline-none focus:border-amber-300 focus:ring-4 focus:ring-amber-300/10" />
-            </label>`).join('')}
+        <div class="rounded-3xl border border-[#FDE293] bg-google-yellowSoft p-4 sm:p-5">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 shrink-0 text-google-yellowText">groups</span>
+            <div>
+              <h3 class="font-semibold text-google-text">Desempate por suma de edades</h3>
+              <p class="mt-1 text-sm leading-5 text-google-yellowText">Introduce la suma de edades de la última convocatoria. La mayor suma queda por delante.</p>
+            </div>
+          </div>
+          <div class="mt-4 grid gap-3 sm:grid-cols-2">
+            ${teams.map(team => `
+              <label class="block rounded-2xl border border-[#FDE293] bg-white p-3">
+                <span class="block text-xs font-medium leading-5 text-google-text">${escapeHtml(shortTeamName(team))}</span>
+                <input type="number" inputmode="numeric" min="1" data-age-input data-team="${escapeHtml(team)}" value="${state.ages[team] || ''}" placeholder="Suma de edades" class="mt-2 h-12 w-full rounded-xl border-0 bg-google-soft px-3 text-base font-semibold text-google-text outline-none focus:bg-google-blueSoft focus:ring-2 focus:ring-google-blue" />
+              </label>`).join('')}
+          </div>
         </div>`;
     }
 
+    function tableStatusBadge(groupResult) {
+      return groupResult.complete
+        ? '<span class="rounded-full bg-google-greenSoft px-3 py-1.5 text-xs font-medium text-google-greenText">Fase completa</span>'
+        : '<span class="rounded-full bg-google-blueSoft px-3 py-1.5 text-xs font-medium text-google-blue">Provisional</span>';
+    }
+
     function renderStandings(standings) {
-      $('#standings').innerHTML = ['A', 'B'].map(group => `
-        <article class="overflow-hidden rounded-3xl border border-white/10 bg-slate-900/85 shadow-xl">
-          <div class="flex items-center justify-between border-b border-white/10 bg-white/5 px-4 py-4">
-            <div><p class="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-400">Fase de grupos</p><h3 class="mt-1 text-xl font-black">Grupo ${group}</h3></div>
-            <span class="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300 ring-1 ring-emerald-400/20">Top 2 clasifica</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full min-w-[760px] text-left text-xs">
-              <thead class="bg-slate-950/50 text-[10px] uppercase tracking-wider text-slate-400">
-                <tr><th class="px-3 py-3 text-center">Pos</th><th class="px-3 py-3">Equipo</th><th class="px-2 py-3 text-center">Pts</th><th class="px-2 py-3 text-center">PJ</th><th class="px-2 py-3 text-center">PG</th><th class="px-2 py-3 text-center">PE</th><th class="px-2 py-3 text-center">PP</th><th class="px-2 py-3 text-center">GF</th><th class="px-2 py-3 text-center">GC</th><th class="px-3 py-3 text-center">DIF</th></tr>
-              </thead>
-              <tbody>
-                ${standings[group].map(team => `
-                  <tr class="border-t border-white/5 ${team.pos <= 2 ? 'bg-emerald-400/10' : ''} transition-colors duration-300">
-                    <td class="px-3 py-3 text-center"><span class="inline-grid h-8 w-8 place-items-center rounded-xl ${team.pos <= 2 ? 'bg-emerald-400 font-black text-slate-950' : 'bg-white/5 font-bold text-slate-300'}">${team.pos}</span></td>
-                    <td class="max-w-[280px] px-3 py-3 font-bold leading-5 text-white">${escapeHtml(shortTeamName(team.equipo))}${team.pos <= 2 ? '<span class="ml-2 inline-block rounded-full bg-emerald-400/15 px-2 py-0.5 text-[9px] font-black uppercase text-emerald-300">SF</span>' : ''}</td>
-                    <td class="px-2 py-3 text-center text-sm font-black text-white">${team.pts}</td>
-                    <td class="px-2 py-3 text-center text-slate-300">${team.j}</td><td class="px-2 py-3 text-center text-slate-300">${team.g}</td><td class="px-2 py-3 text-center text-slate-300">${team.e}</td><td class="px-2 py-3 text-center text-slate-300">${team.p}</td><td class="px-2 py-3 text-center text-slate-300">${team.gf}</td><td class="px-2 py-3 text-center text-slate-300">${team.gc}</td>
-                    <td class="px-3 py-3 text-center font-black ${team.dif > 0 ? 'text-emerald-300' : team.dif < 0 ? 'text-rose-300' : 'text-slate-300'}">${team.dif > 0 ? '+' : ''}${team.dif}</td>
-                  </tr>`).join('')}
-              </tbody>
-            </table>
-          </div>
-          <p class="border-t border-white/5 px-4 py-3 text-[11px] leading-5 text-slate-500">Desempate: puntos → directo/minitorneo → DIF → GF → edad acumulada.</p>
-        </article>`).join('');
+      $('#standings').innerHTML = ['A', 'B'].map(group => {
+        const result = standings[group];
+        return `
+          <article class="overflow-hidden rounded-3xl border border-google-line bg-white">
+            <div class="flex items-center justify-between gap-3 border-b border-google-line px-4 py-4 sm:px-5">
+              <div>
+                <p class="text-xs font-medium text-google-muted">Fase de grupos</p>
+                <h3 class="mt-1 text-xl font-semibold">Grupo ${group}</h3>
+              </div>
+              ${tableStatusBadge(result)}
+            </div>
+
+            ${result.issues.length ? `
+              <div class="space-y-2 border-b border-google-line bg-google-yellowSoft p-3">
+                ${result.issues.map(issue => `<p class="flex gap-2 text-xs leading-5 text-google-yellowText"><span class="material-symbols-rounded mt-0.5 text-[17px]">warning</span><span>${escapeHtml(issue.message)}</span></p>`).join('')}
+              </div>` : ''}
+
+            <div class="overflow-x-auto">
+              <table class="w-full min-w-[760px] border-collapse text-left text-xs">
+                <thead class="bg-google-surface text-[10px] uppercase tracking-[.08em] text-google-muted">
+                  <tr>
+                    <th class="px-3 py-3 text-center font-medium">Pos</th>
+                    <th class="px-3 py-3 font-medium">Equipo</th>
+                    <th class="px-2 py-3 text-center font-medium">Pts</th>
+                    <th class="px-2 py-3 text-center font-medium">PJ</th>
+                    <th class="px-2 py-3 text-center font-medium">PG</th>
+                    <th class="px-2 py-3 text-center font-medium">PE</th>
+                    <th class="px-2 py-3 text-center font-medium">PP</th>
+                    <th class="px-2 py-3 text-center font-medium">GF</th>
+                    <th class="px-2 py-3 text-center font-medium">GC</th>
+                    <th class="px-3 py-3 text-center font-medium">DIF</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${result.table.map(team => {
+                    const qualified = team.pos <= 2;
+                    const issue = result.issues.find(item => item.teams.includes(team.equipo));
+                    return `
+                      <tr class="border-t border-google-line ${qualified ? 'bg-[#F6FBF7]' : 'bg-white'} transition-colors duration-300">
+                        <td class="relative px-3 py-4 text-center font-semibold">
+                          ${qualified ? '<span class="absolute inset-y-0 left-0 w-1 bg-[#34A853]"></span>' : ''}
+                          ${team.pos}
+                        </td>
+                        <td class="max-w-[280px] px-3 py-4 font-semibold leading-5 text-google-text">
+                          ${escapeHtml(shortTeamName(team.equipo))}
+                          ${issue ? '<span class="ml-2 inline-block rounded-full bg-google-yellowSoft px-2 py-0.5 text-[9px] font-medium text-google-yellowText">Empate pendiente</span>' : qualified ? '<span class="ml-2 inline-block rounded-full bg-google-greenSoft px-2 py-0.5 text-[9px] font-medium text-google-greenText">Top 2</span>' : ''}
+                        </td>
+                        <td class="px-2 py-4 text-center text-sm font-semibold text-google-text">${team.pts}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.j}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.g}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.e}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.p}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.gf}</td>
+                        <td class="px-2 py-4 text-center text-google-muted">${team.gc}</td>
+                        <td class="px-3 py-4 text-center font-medium text-google-muted">${team.dif > 0 ? '+' : ''}${team.dif}</td>
+                      </tr>`;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+            <p class="border-t border-google-line px-4 py-3 text-[11px] leading-5 text-google-muted">
+              ${result.complete
+                ? 'Clasificación final calculada con los criterios del reglamento y únicamente con los resultados disponibles.'
+                : 'Clasificación provisional: puntos, diferencia general y goles a favor. Los desempates reglamentarios se aplican al finalizar la fase.'}
+            </p>
+          </article>`;
+      }).join('');
     }
 
     function renderAllMatches() {
-      const simulatedById = Object.fromEntries(getSimulatedMatches().map(m => [m.id, m]));
+      const simulatedById = Object.fromEntries(getSimulatedMatches().map(match => [match.id, match]));
       $('#allMatches').innerHTML = initialTournament.enfrentamientos.map(match => {
         const displayed = match.finalizado ? match : simulatedById[match.id];
         const complete = displayed.finalizado;
+        const status = match.finalizado ? 'Finalizado' : displayed.simulated ? 'Simulado' : 'Programado';
+        const statusClasses = match.finalizado
+          ? 'bg-google-greenSoft text-google-greenText'
+          : displayed.simulated
+            ? 'bg-google-blueSoft text-google-blue'
+            : 'bg-google-soft text-google-muted';
+
         return `
-          <article class="rounded-2xl border ${complete ? 'border-white/10' : 'border-sky-400/20'} bg-slate-900/85 p-4">
-            <div class="mb-3 flex items-center justify-between gap-3">
+          <article class="rounded-3xl border border-google-line bg-white p-4 sm:p-5">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-2">
               <div class="flex items-center gap-2">
-                <span class="rounded-full ${complete ? 'bg-emerald-400/10 text-emerald-300 ring-emerald-400/20' : 'bg-sky-400/10 text-sky-300 ring-sky-400/20'} px-2.5 py-1 text-[10px] font-black uppercase ring-1">${complete ? (displayed.simulated ? 'Simulado' : 'Finalizado') : 'Programado'}</span>
-                <span class="text-[10px] font-black tracking-[0.14em] text-slate-500">${match.fase}</span>
+                <span class="rounded-full px-3 py-1 text-[11px] font-medium ${statusClasses}">${status}</span>
+                <span class="text-[11px] font-medium text-google-muted">${match.fase}</span>
               </div>
-              <time class="text-xs font-bold text-slate-400">${match.fecha || 'Resultado'}</time>
+              <time class="rounded-full bg-google-soft px-3 py-1 text-[11px] font-medium text-google-muted">${match.fecha || 'Resultado'}</time>
             </div>
             <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-              <p class="text-right text-xs font-bold leading-5 text-slate-200 sm:text-sm">${escapeHtml(shortTeamName(match.local))}</p>
-              <div class="min-w-20 rounded-2xl bg-slate-950 px-3 py-2 text-center text-xl font-black text-white ring-1 ring-white/10">${complete ? `${displayed.goles_local} - ${displayed.goles_visitante}` : 'vs'}</div>
-              <p class="text-xs font-bold leading-5 text-slate-200 sm:text-sm">${escapeHtml(shortTeamName(match.visitante))}</p>
+              <p class="text-right text-sm font-medium leading-5">${escapeHtml(shortTeamName(match.local))}</p>
+              <div class="min-w-16 rounded-xl bg-google-soft px-3 py-2 text-center text-lg font-semibold">${complete ? `${displayed.goles_local} - ${displayed.goles_visitante}` : 'VS'}</div>
+              <p class="text-sm font-medium leading-5">${escapeHtml(shortTeamName(match.visitante))}</p>
             </div>
-            <p class="mt-3 text-center text-[11px] font-semibold text-slate-500">📍 Jorge D'Alessandro (Valdelagua)</p>
+            <p class="mt-4 flex items-center justify-center gap-1 text-[11px] text-google-muted"><span class="material-symbols-rounded text-[16px]">location_on</span> Jorge D'Alessandro (Valdelagua)</p>
           </article>`;
       }).join('');
     }
 
     function renderSanctions() {
       $('#sanctions').innerHTML = initialTournament.sanciones.map(item => `
-        <article class="rounded-2xl border ${item.amarillas === 1 ? 'border-amber-400/25 bg-amber-400/10' : 'border-white/10 bg-slate-900/85'} p-4">
+        <article class="rounded-3xl border border-google-line bg-white p-4 sm:p-5">
           <div class="flex items-start justify-between gap-3">
-            <div class="min-w-0"><h4 class="font-black text-white">${escapeHtml(item.jugador)}</h4><p class="mt-1 text-xs font-semibold leading-5 text-slate-400">${escapeHtml(shortTeamName(item.equipo))}</p></div>
+            <div class="min-w-0">
+              <h4 class="font-semibold">${escapeHtml(item.jugador)}</h4>
+              <p class="mt-1 text-xs leading-5 text-google-muted">${escapeHtml(shortTeamName(item.equipo))}</p>
+            </div>
             <div class="flex shrink-0 gap-2">
-              <span class="inline-flex min-w-10 items-center justify-center rounded-xl bg-amber-300 px-2 py-1.5 text-xs font-black text-slate-950">🟨 ${item.amarillas}</span>
-              <span class="inline-flex min-w-10 items-center justify-center rounded-xl bg-rose-500 px-2 py-1.5 text-xs font-black text-white">🟥 ${item.rojas}</span>
+              <span class="inline-flex min-w-11 items-center justify-center rounded-xl bg-[#FDD663] px-2 py-2 text-xs font-semibold text-google-text">${item.amarillas} amar.</span>
+              <span class="inline-flex min-w-11 items-center justify-center rounded-xl bg-[#FCE8E6] px-2 py-2 text-xs font-semibold text-[#C5221F]">${item.rojas} rojas</span>
             </div>
           </div>
-          ${item.amarillas === 1 ? '<div class="mt-3 rounded-xl bg-slate-950/35 px-3 py-2 text-xs font-bold leading-5 text-amber-200">⚠️ A 1 amarilla de la suspensión (2 amarillas = 1 partido de sanción)</div>' : ''}
+          ${item.amarillas === 1 ? `
+            <div class="mt-3 flex gap-2 rounded-2xl bg-google-yellowSoft px-3 py-3 text-xs font-medium leading-5 text-google-yellowText">
+              <span class="material-symbols-rounded mt-0.5 shrink-0 text-[18px]">warning</span>
+              <span>A 1 amarilla de la suspensión (2 amarillas = 1 partido de sanción)</span>
+            </div>` : ''}
         </article>`).join('');
     }
 
     function render() {
       const standings = calculateStandings();
       renderPendingMatches();
-      renderSemifinals(standings);
+      renderQualificationNotices(standings);
+      renderBracket(standings);
       renderAgeTiePanel(standings);
       renderStandings(standings);
       renderAllMatches();
@@ -557,7 +827,9 @@
     }
 
     function updateScore(matchId, side, nextValue) {
-      const parsed = nextValue === '' || nextValue === null ? null : Math.max(0, Math.min(99, Number.parseInt(nextValue, 10) || 0));
+      const parsed = nextValue === '' || nextValue === null
+        ? null
+        : Math.max(0, Math.min(99, Number.parseInt(nextValue, 10) || 0));
       state.scores[matchId][side] = parsed;
       render();
     }
@@ -569,16 +841,19 @@
           const side = button.dataset.side;
           const current = state.scores[id][side];
           const base = Number.isInteger(current) ? current : 0;
-          updateScore(id, side, button.dataset.scoreAction === 'increase' ? base + 1 : Math.max(0, base - 1));
+          const next = button.dataset.scoreAction === 'increase' ? base + 1 : Math.max(0, base - 1);
+          updateScore(id, side, next);
         });
       });
+
       $$('[data-score-input]').forEach(input => {
         input.addEventListener('change', () => updateScore(Number(input.dataset.matchId), input.dataset.side, input.value));
         input.addEventListener('focus', event => event.target.select());
       });
+
       $$('[data-age-input]').forEach(input => {
         input.addEventListener('change', () => {
-          state.ages[input.dataset.team] = Math.max(0, Number.parseInt(input.value, 10) || 0);
+          state.ages[input.dataset.team] = input.value === '' ? null : Math.max(1, Number.parseInt(input.value, 10) || 1);
           render();
         });
       });
@@ -586,21 +861,35 @@
 
     function activateTab(tab) {
       state.activeTab = tab;
-      $$('[data-tab-panel]').forEach(panel => panel.classList.toggle('hidden', panel.dataset.tabPanel !== tab));
+      $$('[data-tab-panel]').forEach(panel => {
+        panel.classList.toggle('hidden', panel.dataset.tabPanel !== tab);
+      });
+
       $$('[data-tab-button]').forEach(button => {
         const active = button.dataset.tabButton === tab;
-        button.className = `nav-button flex min-h-16 flex-col items-center justify-center gap-1 rounded-2xl px-2 transition ${active ? 'bg-emerald-400/15 text-emerald-300 ring-1 ring-emerald-400/20' : 'text-slate-400 hover:bg-white/5'}`;
+        button.classList.toggle('text-google-blue', active);
+        button.classList.toggle('text-google-muted', !active);
+        const pill = $('.nav-pill', button);
+        pill.classList.toggle('bg-google-blueSoft', active);
       });
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     $('#resetSimulation').addEventListener('click', () => {
-      Object.keys(state.scores).forEach(id => { state.scores[id] = { local: null, visitante: null }; });
-      Object.keys(state.ages).forEach(team => { state.ages[team] = 0; });
+      Object.keys(state.scores).forEach(id => {
+        state.scores[id] = { local: null, visitante: null };
+      });
+      Object.keys(state.ages).forEach(team => {
+        state.ages[team] = null;
+      });
       render();
     });
 
-    $$('[data-tab-button]').forEach(button => button.addEventListener('click', () => activateTab(button.dataset.tabButton)));
+    $$('[data-tab-button]').forEach(button => {
+      button.addEventListener('click', () => activateTab(button.dataset.tabButton));
+    });
+
     render();
   </script>
 </body>
