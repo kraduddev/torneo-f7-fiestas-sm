@@ -70,8 +70,8 @@
     <header class="sticky top-0 z-30 border-b border-google-line bg-white/95 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <div class="min-w-0">
-          <p class="truncate text-xs font-medium text-google-muted">Campamento Krusty</p>
-          <h1 class="truncate text-xl font-semibold tracking-tight">Torneo de fútbol</h1>
+          <p class="truncate text-xs font-medium text-google-muted">🦖FÚTBOL 7 +35</p>
+          <h1 class="truncate text-xl font-semibold tracking-tight">Santa Marta 2026</h1>
         </div>
         <div class="inline-flex shrink-0 items-center gap-2 rounded-full bg-google-greenSoft px-3 py-1.5 text-xs font-medium text-google-greenText">
           <span class="h-2 w-2 rounded-full bg-[#34A853]"></span>
@@ -123,7 +123,7 @@
         <aside class="rounded-2xl border border-google-line bg-white p-4 text-sm leading-6 text-google-muted">
           <div class="flex gap-3">
             <span class="material-symbols-rounded mt-0.5 text-google-blue">info</span>
-            <p><strong class="font-medium text-google-text">Criterios:</strong> la tabla es provisional hasta completar el grupo. Al finalizar se aplica resultado directo entre dos equipos o minitorneo entre tres o más.</p>
+            <p><strong class="font-medium text-google-text">Criterios:</strong> la tabla es provisional hasta completar el grupo. Al finalizar se aplican los desempates reglamentarios y, si persiste la igualdad, el juego limpio simulado: menos rojas y después menos amarillas.</p>
           </div>
         </aside>
       </section>
@@ -156,21 +156,86 @@
           <div id="sanctions" class="space-y-3"></div>
         </section>
       </section>
+
+      <section data-tab-panel="normas" class="hidden panel-enter space-y-5">
+        <div>
+          <p class="text-xs font-medium uppercase tracking-[.12em] text-google-muted">Reglamento oficial</p>
+          <h2 class="mt-1 text-2xl font-semibold">Normas del torneo</h2>
+          <p class="mt-2 text-sm text-google-muted">Texto de referencia utilizado por la calculadora de clasificación.</p>
+        </div>
+
+        <article class="rounded-3xl border border-google-line bg-white p-5 sm:p-7">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 text-google-blue">scoreboard</span>
+            <div>
+              <h3 class="text-lg font-semibold">1. Puntuación</h3>
+              <p class="mt-3 text-sm leading-6 text-google-muted"><strong class="font-medium text-google-text">Empate:</strong> 1 punto.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-google-line bg-white p-5 sm:p-7">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 text-google-blue">social_leaderboard</span>
+            <div class="min-w-0 flex-1">
+              <h3 class="text-lg font-semibold">2. Desempate entre 2 equipos</h3>
+              <p class="mt-2 text-sm leading-6 text-google-muted">En caso de igualdad de puntos al finalizar la fase, se aplican sucesivamente:</p>
+              <ol class="mt-4 space-y-3 text-sm leading-6">
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">1</span><span><strong class="font-medium">Resultado directo:</strong> resultado del enfrentamiento particular.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">2</span><span><strong class="font-medium">Diferencia de goles:</strong> mayor diferencia general (GF - GC).</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">3</span><span><strong class="font-medium">Goles a favor:</strong> mayor número de goles anotados.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-yellowSoft text-xs font-semibold text-google-yellowText">4</span><span><strong class="font-medium">Juego limpio de la simulación:</strong> menos tarjetas rojas y, en igualdad, menos amarillas.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">5</span><span><strong class="font-medium">Suma de edades:</strong> vence el equipo con mayor suma de edades de la última convocatoria.</span></li>
+              </ol>
+              <div class="mt-4 rounded-2xl bg-google-yellowSoft px-4 py-3 text-xs leading-5 text-google-yellowText">El criterio de juego limpio se incorpora para contabilizar las tarjetas introducidas en los partidos simulados. Se comparan sin ponderaciones arbitrarias: primero rojas y después amarillas.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-google-line bg-white p-5 sm:p-7">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 text-google-blue">groups</span>
+            <div class="min-w-0 flex-1">
+              <h3 class="text-lg font-semibold">3. Empates múltiples</h3>
+              <ol class="mt-4 space-y-3 text-sm leading-6">
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">1</span><span><strong class="font-medium">Minitorneo de puntuación:</strong> puntos obtenidos exclusivamente entre los equipos empatados.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">2</span><span><strong class="font-medium">Diferencia de goles:</strong> mayor diferencia en el minitorneo.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-blueSoft text-xs font-semibold text-google-blue">3</span><span><strong class="font-medium">Goles a favor:</strong> mayor número de goles en el minitorneo.</span></li>
+                <li class="flex gap-3"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-google-yellowSoft text-xs font-semibold text-google-yellowText">4</span><span><strong class="font-medium">Juego limpio de la simulación:</strong> menos rojas y después menos amarillas entre los equipos que continúen empatados.</span></li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-3xl border border-google-line bg-white p-5 sm:p-7">
+          <div class="flex gap-3">
+            <span class="material-symbols-rounded mt-0.5 text-google-yellowText">style</span>
+            <div>
+              <h3 class="text-lg font-semibold">4. Sanciones disciplinarias</h3>
+              <p class="mt-3 text-sm leading-6 text-google-muted">La acumulación de <strong class="font-medium text-google-text">2 tarjetas amarillas</strong> durante el campeonato supone <strong class="font-medium text-google-text">1 partido de sanción</strong>.</p>
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
 
     <nav class="safe-nav fixed inset-x-0 bottom-0 z-40 border-t border-google-line bg-white/95 px-3 pt-2 backdrop-blur" aria-label="Navegación principal">
-      <div class="mx-auto grid max-w-xl grid-cols-3 gap-1">
-        <button type="button" data-tab-button="calculadora" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-blue transition duration-300">
-          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full bg-google-blueSoft px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">calculate</span></span>
-          <span class="text-[11px] font-medium">Calculadora</span>
+      <div class="mx-auto grid max-w-2xl grid-cols-4 gap-1">
+        <button type="button" data-tab-button="calculadora" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-1 text-google-blue transition duration-300">
+          <span class="nav-pill inline-flex min-w-14 justify-center rounded-full bg-google-blueSoft px-4 py-1.5"><span class="material-symbols-rounded text-[23px]">calculate</span></span>
+          <span class="text-[10px] font-medium sm:text-[11px]">Calculadora</span>
         </button>
-        <button type="button" data-tab-button="clasificacion" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-muted transition duration-300">
-          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">leaderboard</span></span>
-          <span class="text-[11px] font-medium">Clasificación</span>
+        <button type="button" data-tab-button="clasificacion" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-1 text-google-muted transition duration-300">
+          <span class="nav-pill inline-flex min-w-14 justify-center rounded-full px-4 py-1.5"><span class="material-symbols-rounded text-[23px]">leaderboard</span></span>
+          <span class="text-[10px] font-medium sm:text-[11px]">Clasificación</span>
         </button>
-        <button type="button" data-tab-button="partidos" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-2 text-google-muted transition duration-300">
-          <span class="nav-pill inline-flex min-w-16 justify-center rounded-full px-5 py-1.5"><span class="material-symbols-rounded text-[23px]">event_note</span></span>
-          <span class="text-[11px] font-medium">Partidos</span>
+        <button type="button" data-tab-button="partidos" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-1 text-google-muted transition duration-300">
+          <span class="nav-pill inline-flex min-w-14 justify-center rounded-full px-4 py-1.5"><span class="material-symbols-rounded text-[23px]">event_note</span></span>
+          <span class="text-[10px] font-medium sm:text-[11px]">Partidos</span>
+        </button>
+        <button type="button" data-tab-button="normas" class="nav-button flex min-h-[68px] flex-col items-center justify-center gap-1 px-1 text-google-muted transition duration-300">
+          <span class="nav-pill inline-flex min-w-14 justify-center rounded-full px-4 py-1.5"><span class="material-symbols-rounded text-[23px]">gavel</span></span>
+          <span class="text-[10px] font-medium sm:text-[11px]">Normas</span>
         </button>
       </div>
     </nav>
@@ -217,6 +282,14 @@
           .filter(match => !match.finalizado)
           .map(match => [match.id, { local: null, visitante: null }])
       ),
+      cards: Object.fromEntries(
+        initialTournament.enfrentamientos
+          .filter(match => !match.finalizado)
+          .map(match => [match.id, {
+            local: { amarillas: 0, rojas: 0 },
+            visitante: { amarillas: 0, rojas: 0 }
+          }])
+      ),
       ages: Object.fromEntries(
         Object.values(initialTournament.grupos).flat().map(team => [team.equipo, team.edades_acumuladas || null])
       ),
@@ -250,10 +323,15 @@
         .filter(match => !match.finalizado)
         .map(match => {
           const score = state.scores[match.id];
+          const cards = state.cards[match.id];
           return {
             ...match,
             goles_local: score.local,
             goles_visitante: score.visitante,
+            amarillas_local: cards.local.amarillas,
+            rojas_local: cards.local.rojas,
+            amarillas_visitante: cards.visitante.amarillas,
+            rojas_visitante: cards.visitante.rojas,
             finalizado: isScoreComplete(score),
             simulated: isScoreComplete(score)
           };
@@ -265,6 +343,44 @@
         ...initialTournament.enfrentamientos.filter(match => match.finalizado),
         ...getSimulatedMatches().filter(match => match.finalizado)
       ];
+    }
+
+    const initialDiscipline = Object.values(initialTournament.grupos).flat().reduce((acc, team) => {
+      acc[team.equipo] = { amarillas: 0, rojas: 0 };
+      return acc;
+    }, {});
+
+    initialTournament.sanciones.forEach(item => {
+      if (!initialDiscipline[item.equipo]) initialDiscipline[item.equipo] = { amarillas: 0, rojas: 0 };
+      initialDiscipline[item.equipo].amarillas += Number(item.amarillas) || 0;
+      initialDiscipline[item.equipo].rojas += Number(item.rojas) || 0;
+    });
+
+    function getTeamDiscipline(teamName) {
+      const totals = { ...(initialDiscipline[teamName] || { amarillas: 0, rojas: 0 }) };
+      getSimulatedMatches().filter(match => match.finalizado).forEach(match => {
+        if (match.local === teamName) {
+          totals.amarillas += match.amarillas_local;
+          totals.rojas += match.rojas_local;
+        } else if (match.visitante === teamName) {
+          totals.amarillas += match.amarillas_visitante;
+          totals.rojas += match.rojas_visitante;
+        }
+      });
+      return totals;
+    }
+
+    function compareFairPlay(teamA, teamB) {
+      const cardsA = getTeamDiscipline(teamA.equipo);
+      const cardsB = getTeamDiscipline(teamB.equipo);
+      if (cardsA.rojas !== cardsB.rojas) return cardsA.rojas - cardsB.rojas;
+      if (cardsA.amarillas !== cardsB.amarillas) return cardsA.amarillas - cardsB.amarillas;
+      return 0;
+    }
+
+    function fairPlayLabel(teamName) {
+      const cards = getTeamDiscipline(teamName);
+      return `${cards.rojas}R · ${cards.amarillas}A`;
     }
 
     function isGroupComplete(group) {
@@ -355,6 +471,11 @@
         return { ordered: [...teams].sort((a, b) => b.gf - a.gf), issue: null };
       }
 
+      const fairPlayDifference = compareFairPlay(teamA, teamB);
+      if (fairPlayDifference !== 0) {
+        return { ordered: [...teams].sort(compareFairPlay), issue: null };
+      }
+
       const ageA = Number(state.ages[teamA.equipo]);
       const ageB = Number(state.ages[teamB.equipo]);
       const agesAvailable = Number.isFinite(ageA) && ageA > 0 && Number.isFinite(ageB) && ageB > 0;
@@ -370,8 +491,8 @@
           teams: teams.map(team => team.equipo),
           type: 'age-required',
           message: agesAvailable
-            ? 'La suma de edades también está empatada; el reglamento no define un criterio posterior.'
-            : 'Falta la suma de edades de la última convocatoria para resolver el empate.'
+            ? 'El juego limpio y la suma de edades también están empatados; no hay un criterio posterior definido.'
+            : 'El juego limpio está empatado y falta la suma de edades de la última convocatoria para resolver el empate.'
         }
       };
     }
@@ -430,6 +551,8 @@
         if (statA.pts !== statB.pts) return statB.pts - statA.pts;
         if (statA.dif !== statB.dif) return statB.dif - statA.dif;
         if (statA.gf !== statB.gf) return statB.gf - statA.gf;
+        const fairPlay = compareFairPlay(a, b);
+        if (fairPlay !== 0) return fairPlay;
         return compareByInitialPosition(a, b);
       });
 
@@ -439,7 +562,9 @@
         let j = i + 1;
         while (j < ordered.length) {
           const candidate = mini[ordered[j].equipo];
-          if (candidate.pts !== base.pts || candidate.dif !== base.dif || candidate.gf !== base.gf) break;
+          const sameMini = candidate.pts === base.pts && candidate.dif === base.dif && candidate.gf === base.gf;
+          const sameFairPlay = compareFairPlay(ordered[i], ordered[j]) === 0;
+          if (!sameMini || !sameFairPlay) break;
           j += 1;
         }
         if (j - i > 1) unresolvedTeams.push(...ordered.slice(i, j).map(team => team.equipo));
@@ -453,7 +578,7 @@
               group,
               teams: unresolvedTeams,
               type: 'multiple-tie-not-resolved',
-              message: 'El minitorneo sigue empatado tras puntos, diferencia de goles y goles a favor; el reglamento no define otro criterio.'
+              message: 'El minitorneo y el juego limpio siguen empatados; no hay otro criterio definido para este empate múltiple.'
             }
           : null
       };
@@ -463,7 +588,8 @@
       const table = initialTournament.grupos[group].map(team => ({
         ...team,
         initialPos: team.pos,
-        edades_acumuladas: Number(state.ages[team.equipo]) || 0
+        edades_acumuladas: Number(state.ages[team.equipo]) || 0,
+        tarjetas: getTeamDiscipline(team.equipo)
       }));
 
       getSimulatedMatches()
@@ -533,10 +659,28 @@
         </div>`;
     }
 
+    function cardControl(match, side, type, value) {
+      const isYellow = type === 'amarillas';
+      const label = isYellow ? 'Tarjetas amarillas' : 'Tarjetas rojas';
+      const badgeClass = isYellow ? 'bg-[#FDD663] text-google-text' : 'bg-[#FCE8E6] text-[#C5221F]';
+      return `
+        <div class="flex items-center gap-1.5">
+          <span class="inline-flex h-7 min-w-7 items-center justify-center rounded-lg px-1.5 text-[10px] font-bold ${badgeClass}" aria-hidden="true">${isYellow ? 'A' : 'R'}</span>
+          <button type="button" data-card-action="decrease" data-match-id="${match.id}" data-side="${side}" data-card-type="${type}" aria-label="Restar ${label.toLowerCase()}" class="grid h-9 w-9 place-items-center rounded-full border border-google-line bg-white text-google-muted transition duration-300 hover:bg-google-soft active:scale-95">
+            <span class="material-symbols-rounded text-[18px]">remove</span>
+          </button>
+          <input aria-label="${label}" inputmode="numeric" min="0" max="99" type="number" data-card-input data-match-id="${match.id}" data-side="${side}" data-card-type="${type}" value="${value}" class="h-10 w-11 rounded-xl border-0 bg-google-soft text-center text-sm font-semibold text-google-text outline-none transition duration-300 focus:bg-google-blueSoft focus:ring-2 focus:ring-google-blue" />
+          <button type="button" data-card-action="increase" data-match-id="${match.id}" data-side="${side}" data-card-type="${type}" aria-label="Sumar ${label.toLowerCase()}" class="grid h-9 w-9 place-items-center rounded-full border border-google-line bg-white text-google-blue transition duration-300 hover:bg-google-blueSoft active:scale-95">
+            <span class="material-symbols-rounded text-[18px]">add</span>
+          </button>
+        </div>`;
+    }
+
     function renderPendingMatches() {
       const matches = initialTournament.enfrentamientos.filter(match => !match.finalizado);
       $('#pendingMatches').innerHTML = matches.map(match => {
         const score = state.scores[match.id];
+        const cards = state.cards[match.id];
         const complete = isScoreComplete(score);
         return `
           <article class="rounded-3xl border ${complete ? 'border-[#CEEAD6]' : 'border-google-line'} bg-white p-4 transition-all duration-300 sm:p-5">
@@ -558,6 +702,30 @@
                 ${scoreControl(match, 'visitante', score.visitante)}
               </div>
             </div>
+
+            <details class="mt-4 rounded-2xl bg-google-surface p-3">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-xs font-medium text-google-muted">
+                <span class="flex items-center gap-2"><span class="material-symbols-rounded text-[18px]">style</span> Añadir tarjetas para el desempate</span>
+                <span class="material-symbols-rounded text-[18px]">expand_more</span>
+              </summary>
+              <div class="mt-3 space-y-3 border-t border-google-line pt-3">
+                <div class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                  <p class="text-xs font-medium leading-5">${escapeHtml(shortTeamName(match.local))}</p>
+                  <div class="flex flex-wrap gap-2">
+                    ${cardControl(match, 'local', 'amarillas', cards.local.amarillas)}
+                    ${cardControl(match, 'local', 'rojas', cards.local.rojas)}
+                  </div>
+                </div>
+                <div class="h-px bg-google-line"></div>
+                <div class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+                  <p class="text-xs font-medium leading-5">${escapeHtml(shortTeamName(match.visitante))}</p>
+                  <div class="flex flex-wrap gap-2">
+                    ${cardControl(match, 'visitante', 'amarillas', cards.visitante.amarillas)}
+                    ${cardControl(match, 'visitante', 'rojas', cards.visitante.rojas)}
+                  </div>
+                </div>
+              </div>
+            </details>
           </article>`;
       }).join('');
 
@@ -580,7 +748,7 @@
             <span class="rounded-full px-2.5 py-1 text-[10px] font-medium ${status.className}">${status.label}</span>
           </div>
           <p class="text-sm font-semibold leading-5 ${status.unresolved ? 'text-google-muted' : 'text-google-text'}">${status.unresolved ? 'Pendiente de resolver' : escapeHtml(shortTeamName(team.equipo))}</p>
-          ${status.unresolved ? '' : `<p class="mt-1 text-xs text-google-muted">${team.pts} pts · DIF ${team.dif > 0 ? '+' : ''}${team.dif}</p>`}
+          ${status.unresolved ? '' : `<p class="mt-1 text-xs text-google-muted">${team.pts} pts · DIF ${team.dif > 0 ? '+' : ''}${team.dif} · ${fairPlayLabel(team.equipo)}</p>`}
         </div>`;
     }
 
@@ -788,6 +956,11 @@
               <div class="min-w-16 rounded-xl bg-google-soft px-3 py-2 text-center text-lg font-semibold">${complete ? `${displayed.goles_local} - ${displayed.goles_visitante}` : 'VS'}</div>
               <p class="text-sm font-medium leading-5">${escapeHtml(shortTeamName(match.visitante))}</p>
             </div>
+            ${displayed.simulated ? `
+              <div class="mt-4 flex flex-wrap items-center justify-center gap-2 text-[10px] text-google-muted">
+                <span class="rounded-full bg-google-soft px-2.5 py-1">Local: ${displayed.rojas_local}R · ${displayed.amarillas_local}A</span>
+                <span class="rounded-full bg-google-soft px-2.5 py-1">Visitante: ${displayed.rojas_visitante}R · ${displayed.amarillas_visitante}A</span>
+              </div>` : ''}
             <p class="mt-4 flex items-center justify-center gap-1 text-[11px] text-google-muted"><span class="material-symbols-rounded text-[16px]">location_on</span> Jorge D'Alessandro (Valdelagua)</p>
           </article>`;
       }).join('');
@@ -834,6 +1007,12 @@
       render();
     }
 
+    function updateCard(matchId, side, type, nextValue) {
+      const parsed = Math.max(0, Math.min(99, Number.parseInt(nextValue, 10) || 0));
+      state.cards[matchId][side][type] = parsed;
+      render();
+    }
+
     function bindDynamicEvents() {
       $$('[data-score-action]').forEach(button => {
         button.addEventListener('click', () => {
@@ -848,6 +1027,22 @@
 
       $$('[data-score-input]').forEach(input => {
         input.addEventListener('change', () => updateScore(Number(input.dataset.matchId), input.dataset.side, input.value));
+        input.addEventListener('focus', event => event.target.select());
+      });
+
+      $$('[data-card-action]').forEach(button => {
+        button.addEventListener('click', () => {
+          const id = Number(button.dataset.matchId);
+          const side = button.dataset.side;
+          const type = button.dataset.cardType;
+          const current = state.cards[id][side][type];
+          const next = button.dataset.cardAction === 'increase' ? current + 1 : Math.max(0, current - 1);
+          updateCard(id, side, type, next);
+        });
+      });
+
+      $$('[data-card-input]').forEach(input => {
+        input.addEventListener('change', () => updateCard(Number(input.dataset.matchId), input.dataset.side, input.dataset.cardType, input.value));
         input.addEventListener('focus', event => event.target.select());
       });
 
@@ -879,6 +1074,12 @@
     $('#resetSimulation').addEventListener('click', () => {
       Object.keys(state.scores).forEach(id => {
         state.scores[id] = { local: null, visitante: null };
+      });
+      Object.keys(state.cards).forEach(id => {
+        state.cards[id] = {
+          local: { amarillas: 0, rojas: 0 },
+          visitante: { amarillas: 0, rojas: 0 }
+        };
       });
       Object.keys(state.ages).forEach(team => {
         state.ages[team] = null;
